@@ -53,11 +53,11 @@ Node* MergeList(Node *headA, Node *headB) {
 	//if data in node A < data in node B then assign temp to the smaller node
 	if(headA->data <= headB->data) {
 		temp=headA;
-		headA = temp->next; //head A moves to the next of temp
+		headA = headA->next; //head A moves to the next node in list
 	}
 	else {
 		temp=headB;
-		headB=temp->next; //headB moves to next of temp
+		headB=headB->next; //headB moves to next of temp
 	}
 	 
 	new_head=temp;// now we need to assign new_head to temp node which is the node with smallest value
@@ -68,12 +68,12 @@ Node* MergeList(Node *headA, Node *headB) {
 		if(headA->data <= headB->data)  {
 			temp->next=headA;
 			temp=headA; 
-			headA=temp->next;
+			headA=headA->next;
 		}
 		else {
 			temp->next=headB; //temp links to headB
 			temp=headB;//temp becomes headB node
-			headB=temp->next;//headB moves to next to temp
+			headB=headB->next;//headB moves to next to temp
 		}
 		
 	}
