@@ -82,3 +82,51 @@ int FindMergeNode(Node *headA, Node *headB)
 	return 0; //if no merge point
 }
 //TIME COMPLEXITY = O(nlogn + mlogn) ,SPACE COMPLEXITY = O(n^2)
+
+
+
+
+//BEST METHOD-T(n) = O(m+n) , Space complexity = O(1)
+
+int FindMergeNode(Node *headA, Node *headB)
+{
+		//lengths of lists A and B
+		int m = length(headA);
+		int n = length(headB);
+		//finding difference in lengths of list A and B
+		int d = (n-m);
+	
+	//if list A is greater in size then simply swap the pointers to head node
+	if(m>n) {
+	
+	  Node *temp = headA;
+	  headA=headB;
+	  headB=temp;
+	  	  
+	  int d = (n-m);
+	  	
+	  
+	}
+	
+	//traversing d nodes in list B to reach at same length of List A
+	for(int i=0 ; i<d ; i++) { //O(m+n)
+		headB = headB->next;
+	}
+	
+	//now both pointers headA and headB are equidistant from the merge point if any-so we only need a single loop
+	
+	while( headA!=NULL && headB!=NULL ) {
+		
+		//comparing the address in lists
+		if(headA==headB) {
+	
+			return headA->data;
+		
+		}
+		headA = headA->next;
+		headB = headB->next;
+		
+	}
+	return 0;
+
+}
