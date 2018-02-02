@@ -16,6 +16,40 @@ int length(Node *head) {
     return len;
 }
 
+//METHOD-1 : BRUTE FORCE APPROACH
+
+int FindMergeNode(Node *headA, Node *headB)
+{
+    	//lengths of lists A and B
+	int m = length(headA);
+	int n = length(headB);
+	
+	struct Node *temp = headB;
+	//trversing lists
+	
+	for(int i=0; i < m ;i++) {
+		
+		//resetting headB to starting node
+		headB = temp;
+		
+		for(int j=0; j < n; j++) {
+			//comparing address
+			if(headA==headB) {
+				//the address or pointer to the merge point
+				
+				return headA->data;
+			}
+			
+			headB=headB->next;
+			
+		}
+		headA= headA->next;
+	}
+	return 0;
+}
+//TIME COMPLEXITY = O(mn) not efficient
+   
+
 int FindMergeNode(Node *headA, Node *headB)
 {
     //lengths of lists A and B
