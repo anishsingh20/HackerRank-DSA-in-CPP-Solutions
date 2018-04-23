@@ -13,6 +13,7 @@ Node* Insert(Node *head,int data)
     
   // Complete this method
     struct Node *temp1 = new Node(); //allocating new memory
+
     
     struct Node *temp;
     
@@ -20,21 +21,23 @@ Node* Insert(Node *head,int data)
     
     if(head==NULL) {
         
-        temp1->next = head;
+        
         head = temp1;
+      
+        return head;
         }
     
-    else {
-        temp = head;
+    
+    temp = head;
     //traversing the list till last node
-    while(temp!=NULL) {
+    while(temp->next!=NULL) {
         temp=temp->next;
     }
     temp->next = temp1;
     temp1->next = NULL;
     
     return head;
-    }
+    
     
     
 }
