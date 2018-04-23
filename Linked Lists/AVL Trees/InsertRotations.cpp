@@ -13,7 +13,7 @@ typedef struct node
 
 int height(node *root)
 {
-    if(!root)
+    if(root==NULL)
             return -1;
     
     else return max(height(root->left),height(root->right)) + 1;
@@ -74,24 +74,26 @@ node * insert(node * root,int val)
     node *newNode = new node();
     newNode->val = val;
     newNode->left = newNode->right = NULL;
+    newNode->ht=-1;
     
    if(root==NULL)
    {
        root = newNode;
-       return newNode;
+       root->ht = 0;
+       return root;
    }
     
     //insert in left subtree
-    if(val < root->val)
+    if(val <= root->val)
     {
         root->left = insert(root->left,val);
         
         //after inertion check for balance condition
-        
-        if(height(root->right) - height(root->left)==2)
+        int bal = ( height(root->left) - height(root->right));
+        if( abs(bal) > 1)
         {
             //single left-left rotation 
-            if(val < root->left->val)
+            if(val <= root->left->val)
                     root = SingleLeftRotation(root);
             else
                     root = DoubleLeftRightRotation(root);
@@ -99,21 +101,23 @@ node * insert(node * root,int val)
     }
     
     //insertion in righ subtree
-    if(val > root->val)
+    if(val >= root->val)
     {
         root->right = insert(root->right,val);
         
         //after inertion check for balance condition and necessary rotations
+        int balance = ( height(root->left) - height(root->right));
         
-        if( (height(root->right) - height(root->left)==2))
+        if( abs(balance) > 1) 
         {
             //single right-right rotation 
-            if(val > root->right->val)
+            if(val >= root->right->val)
                     root = SingleRightRotation(root);
             else
                     root = DoubleRightLeftRotation(root);
         }
     }
+    
     
     root->ht = max(height(root->left),height(root->right)) + 1;
     
