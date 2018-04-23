@@ -24,17 +24,38 @@ int height(node *root)
 
 node *SingleLeftRotation(node *root)
 {
+    node *l = root->left;
+    root->left = l->right;
     
+    //root is now l
+    l->right = root;
+    //updating heights
+    
+    root->ht = max(height(root->left),height(root->right)) + 1;
+	l->ht = max(height(l->left), root->ht) + 1;
+	
+	return l;//new root
 }
 
 node *SingleRightRotation(node *root)
 {
+    node *r = root->right;
+    root->right = r->left;
     
+    //new root is r i.e the right child of node where violation occurs
+    r->left = root;
+    
+    //updating heights
+    root->ht = max(height(root->left),height(root->right)) + 1;
+	r->ht  = max(height(r->right), root->ht) + 1;
+
+    return r;
 }
+
 
 node *DoubleLeftRightRotation(node *root)
 {
-    root->left = SingleRightRotation(root)
+    root->left = SingleRightRotation(root);
         
         return SingleLeftRotation(root);
 }
@@ -70,8 +91,8 @@ node * insert(node * root,int val)
         if(height(root->right) - height(root->left)==2)
         {
             //single left-left rotation 
-            if(val < root->left->data)
-                    root = SingleleftRotation(root);
+            if(val < root->left->val)
+                    root = SingleLeftRotation(root);
             else
                     root = DoubleLeftRightRotation(root);
         }
@@ -87,14 +108,14 @@ node * insert(node * root,int val)
         if( (height(root->right) - height(root->left)==2))
         {
             //single right-right rotation 
-            if(val > root->right->data)
+            if(val > root->right->val)
                     root = SingleRightRotation(root);
             else
                     root = DoubleRightLeftRotation(root);
         }
     }
     
-    
+    root->ht = max(height(root->left),height(root->right)) + 1;
     
     return root;
        
