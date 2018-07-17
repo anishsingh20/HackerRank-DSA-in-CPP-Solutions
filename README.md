@@ -1,2 +1,2 @@
 # HackerRank-DSA-in-CPP-Solutions
-This repository contains the solutions to the problems solved by me given on HackerRank data structures and algorithms parctise section in C++.
+This repository contains the solutions to the various programming problems solved by me on HackerRank. 
